@@ -1,0 +1,104 @@
+{
+  "name": "cmake-tidy",
+  "displayName": "CMake Tidy",
+  "description": "Run cmake-tidy on CMake files",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.136.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:cmake"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cmake-tidy.runCurrentFile",
+        "title": "Run CMake Tidy on Current File",
+        "category": "CMake Tidy"
+      },
+      {
+        "command": "cmake-tidy.runSelectedText",
+        "title": "Run CMake Tidy on Selection",
+        "category": "CMake Tidy"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "cmake-tidy.runCurrentFile",
+          "when": "editorLangId == cmake || resourceExtname == .cmake || resourceFilename == CMakeLists.txt"
+        },
+        {
+          "command": "cmake-tidy.runSelectedText",
+          "when": "(editorLangId == cmake || resourceExtname == .cmake || resourceFilename == CMakeLists.txt) && editorHasSelection"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "cmake-tidy.runCurrentFile",
+          "group": "modification",
+          "when": "editorLangId == cmake || resourceExtname == .cmake || resourceFilename == CMakeLists.txt"
+        },
+        {
+          "command": "cmake-tidy.runSelectedText",
+          "group": "modification",
+          "when": "(editorLangId == cmake || resourceExtname == .cmake || resourceFilename == CMakeLists.txt) && editorHasSelection"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "CMake Tidy",
+      "properties": {
+        "cmake-tidy.executable": {
+          "type": "string",
+          "default": "cmake-tidy",
+          "description": "Path or command name for the cmake-tidy executable."
+        },
+        "cmake-tidy.arguments": {
+          "type": "array",
+          "default": [
+            "format"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Arguments passed to cmake-tidy before the active file path."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.136.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "esbuild": "^0.28.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}
