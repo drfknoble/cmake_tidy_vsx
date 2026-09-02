@@ -30,3 +30,9 @@ jobs:
 
       - name: Package VSIX
         run: npx @vscode/vsce package
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cmake-tidy-vsix
+          path: '*.vsix'
