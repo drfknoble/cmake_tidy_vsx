@@ -1,8 +1,10 @@
 {
   "name": "cmake-tidy",
   "displayName": "CMake Tidy",
+  "publisher": "drfknoble",
   "description": "Run cmake-tidy on CMake files",
   "version": "0.0.1",
+  "license": "SEE LICENSE IN LICENSE",
   "engines": {
     "vscode": "^1.136.0"
   },
