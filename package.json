@@ -5,6 +5,10 @@
   "description": "Run cmake-tidy on CMake files",
   "version": "0.0.1",
   "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drfknoble/cmake_tidy_vsx.git"
+  },
   "engines": {
     "vscode": "^1.136.0"
   },
