@@ -1,6 +1,6 @@
 # CMake Tidy
 
-[![Ko-fi](https://img.shields.io/badge/Ko--fi-Donate%20a%20Coffee-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/drfknoble)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-29abe0?logo=ko-fi&logoColor=white)](https://ko-fi.com/drfknoble)
 
 Run and format CMake files or selected code regions with `cmake-tidy` inside Visual Studio Code.
 
