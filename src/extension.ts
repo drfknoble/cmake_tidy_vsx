@@ -241,8 +241,12 @@ function resolveExecutablePath(executable: string): string {
 	}
 
 	if (executable === 'cmake-tidy') {
+		const isWindows = process.platform === 'win32';
+		const venvSubdir = isWindows ? 'Scripts' : 'bin';
+		const exeName = isWindows ? 'cmake-tidy.exe' : 'cmake-tidy';
+
 		if (process.env.VIRTUAL_ENV) {
-			const venvCandidate = path.join(process.env.VIRTUAL_ENV, 'bin', 'cmake-tidy');
+			const venvCandidate = path.join(process.env.VIRTUAL_ENV, venvSubdir, exeName);
 			if (fs.existsSync(venvCandidate)) {
 				return venvCandidate;
 			}
@@ -250,7 +254,7 @@ function resolveExecutablePath(executable: string): string {
 
 		if (workspaceFolder) {
 			for (const venvDir of ['.venv', 'venv', 'env']) {
-				const candidate = path.join(workspaceFolder, venvDir, 'bin', 'cmake-tidy');
+				const candidate = path.join(workspaceFolder, venvDir, venvSubdir, exeName);
 				if (fs.existsSync(candidate)) {
 					return candidate;
 				}
@@ -259,9 +263,10 @@ function resolveExecutablePath(executable: string): string {
 
 		const home = os.homedir();
 		const commonVenvs = [
-			path.join(home, 'zephyrproject', '.venv', 'bin', 'cmake-tidy'),
-			path.join(home, '.venv', 'bin', 'cmake-tidy'),
-			path.join(home, '.local', 'bin', 'cmake-tidy'),
+			path.join(home, '.venv', venvSubdir, exeName),
+			isWindows
+				? path.join(home, 'AppData', 'Roaming', 'Python', 'Scripts', exeName)
+				: path.join(home, '.local', 'bin', exeName),
 		];
 		for (const candidate of commonVenvs) {
 			if (fs.existsSync(candidate)) {
