@@ -6,9 +6,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-- In-place document reformatting for `CMakeLists.txt` and `.cmake` files.
-- Selection-range reformatting support (`cmake-tidy.runSelectedText` & range formatting provider).
-- VS Code document and range formatting provider integration (`Format Document`, `Format Selection`, `formatOnSave`).
-- Automatic Python virtual environment (`.venv`, `VIRTUAL_ENV`) executable resolution.
-- Variable expansion (`~`, `${workspaceFolder}`, `${env:VAR}`) for `cmake-tidy.executable`.
-- Editor context menu integration for CMake files.
+## [0.0.1] - 2026-09-03
+
+- Initial release.
